@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Achados e Perdidos - Etec Darcy Pereira de Moraes</title>
     <style>
-        /* CSS */
+        /* CSS compartilhado entre as páginas */
         :root {
             --primary-color: #E60000; /* Vermelho mais vivo e intenso */
             --secondary-color: #D3D3D3; /* Cinza claro para fundos, mais presente que branco */
@@ -15,6 +15,7 @@
             --dark-gray: #555; /* Cinza escuro para detalhes de texto */
             --success-color: #28a745;
             --warning-color: #ffc107;
+            --info-color: #17a2b8; /* Cor para botões de informação, como o de "Voltar" */
         }
 
         body {
@@ -42,6 +43,25 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo para o botão do cabeçalho */
+        .header .nav-button {
+            background-color: rgba(255, 255, 255, 0.2); /* Um branco semi-transparente */
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Borda mais clara */
+            border-radius: 5px;
+            text-decoration: none; /* Remove sublinhado padrão de links */
+            font-size: 1rem;
+            margin-top: 15px; /* Espaço do título */
+            display: inline-block; /* Permite padding e margem como bloco, mas em linha */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .header .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: white;
         }
 
         .container {
@@ -350,83 +370,87 @@
         /* Responsividade */
         @media (max-width: 768px) {
             body {
-                padding: 10px; /* Reduz o padding geral em telas menores */
+                padding: 10px;
             }
 
             .header h1 {
-                font-size: 2rem; /* Ajusta o tamanho da fonte do título principal */
+                font-size: 2rem;
                 letter-spacing: 1px;
             }
 
+            .header .nav-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
             .container {
-                flex-direction: column; /* Coloca os elementos em coluna para telas pequenas */
-                padding: 15px; /* Reduz o padding do container */
-                margin: 10px auto; /* Ajusta a margem */
+                flex-direction: column;
+                padding: 15px;
+                margin: 10px auto;
             }
 
             .main-content {
-                flex: none; /* Remove a flexbox para permitir que ocupe a largura total */
-                width: 100%; /* Garante que o conteúdo principal ocupe 100% da largura */
+                flex: none;
+                width: 100%;
             }
 
             .sidebar {
-                flex: none; /* Remove a flexbox */
-                width: 100%; /* Garante que a barra lateral ocupe 100% da largura */
-                border-left: none; /* Remove a borda lateral */
-                border-top: 1px solid var(--border-color); /* Adiciona uma borda superior para separar */
+                flex: none;
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
                 padding-left: 0;
-                padding-top: 20px; /* Adiciona padding no topo */
-                margin-top: 20px; /* Adiciona margem entre o conteúdo principal e a sidebar */
+                padding-top: 20px;
+                margin-top: 20px;
             }
 
             form {
-                padding: 15px; /* Reduz o padding do formulário */
+                padding: 15px;
             }
 
             form input[type="text"],
             form input[type="date"],
             form input[type="file"],
             form textarea {
-                width: calc(100% - 10px); /* Ajusta a largura para padding menor */
-                padding: 8px; /* Reduz o padding dos inputs */
+                width: calc(100% - 10px);
+                padding: 8px;
             }
 
             form button {
-                width: 100%; /* Botões ocupam 100% da largura */
+                width: 100%;
                 padding: 10px;
                 font-size: 1rem;
             }
 
             .search-bar input[type="text"] {
-                width: calc(100% - 60px); /* Ajusta a largura da barra de busca para maior preenchimento */
+                width: calc(100% - 60px);
                 padding: 10px;
                 font-size: 1rem;
-                background-position: 5px center; /* Ajusta a posição do ícone de busca */
+                background-position: 5px center;
             }
 
             .item-list {
-                grid-template-columns: 1fr; /* Um item por linha em telas muito pequenas */
+                grid-template-columns: 1fr;
             }
 
             .item-card {
-                padding: 15px; /* Reduz o padding dos cards */
+                padding: 15px;
             }
 
             .modal-content {
-                width: 95%; /* Modal ocupa mais largura em telas pequenas */
+                width: 95%;
                 padding: 20px;
             }
 
             .modal-content button {
-                width: 100%; /* Botões do modal ocupam 100% da largura */
-                margin-bottom: 10px; /* Adiciona margem entre os botões */
+                width: 100%;
+                margin-bottom: 10px;
             }
             .modal-content button.cancel {
-                margin-right: 0; /* Remove a margem direita do botão cancelar */
+                margin-right: 0;
             }
         }
 
-        /* Pequenos ajustes para telas médias, se necessário (ex: tablets em modo paisagem) */
         @media (min-width: 769px) and (max-width: 1024px) {
             .container {
                 padding: 25px;
@@ -448,6 +472,7 @@
     <div class="header">
         <h1>Etec Darcy Pereira de Moraes</h1>
         <p>Sistema de Achados e Perdidos</p>
+        <a href="fotos.html" class="nav-button">Ir para as fotos dos itens</a>
     </div>
 
     <div class="container">
@@ -701,7 +726,7 @@
                 });
             };
 
-            // Função para gerar tags dinamicamente
+            // Função para gerar tags dinamicamente e adicionar event listeners
             const generateTags = () => {
                 const initialTags = ['mochila', 'celular', 'livro', 'estojo', 'chave', 'óculos'];
                 const dynamicTags = new Set();
@@ -722,10 +747,11 @@
                     tagListDiv.appendChild(newTag);
                 });
 
+                // Adiciona o event listener APÓS criar as tags
                 document.querySelectorAll('.tag').forEach(tag => {
                     tag.addEventListener('click', () => {
-                        searchInput.value = tag.dataset.tag;
-                        renderItems(tag.dataset.tag);
+                        searchInput.value = tag.dataset.tag; // Preenche a barra de busca
+                        renderItems(tag.dataset.tag); // Filtra os itens
                     });
                 });
             };
